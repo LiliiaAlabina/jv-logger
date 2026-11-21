@@ -13,15 +13,15 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         logger.info("Method login was called.");
         User user = findByLogin(login);
         if (!user.getPassword().equals(password)) {
-            logger.error("Username or password are incorrect{}", login);
+            logger.error("Username or password are incorrect. Login: {}", login);
             throw new AuthenticationException("Username or password are incorrect");
         }
+        logger.info("Login authenticated {}", login);
         return user;
     }
 
     private User findByLogin(String login) {
         User user = new User(login, "1234");
-        // this user identifier should be set by DB. We will use dummy data for this example
         user.setUserId(2L);
         return user;
     }
